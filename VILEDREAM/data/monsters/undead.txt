@@ -1,0 +1,78 @@
+
+
+{
+	"id"	"crawling_hand"		"dl" "1"
+	"name"	"Crawling Hand"		"glyph" "122"	"color" "140,70,0"
+	
+	"health" "5"
+	"melee_acc" "-1"	"melee_dmg" "1d3"
+	"ev" "10"
+	
+	"flag" "undead" 	"flag" "grapples"	"flag" "no_corpse"
+}
+
+{
+	"id" 	"floating_skull"	"dl" "1"
+	"name" 	"Floating Skull"	"glyph" "115" 	"color" "210,210,210"
+	
+	"health" "2"
+	"melee_acc" "-2"	"melee_dmg" "1d3"
+	"ev" "9" 	"dr" "3"
+	
+	"flag" "undead"		"flag" "flying"		"flag" "no_corpse"	"flag" "flits"
+}
+
+
+{
+	"id"	"drowned_dead"		"dl" "2"
+	"name" "Drowned Dead"		"glyph" "122"	"color" "0,0,200"
+	
+	"health" "15"
+	"melee_acc" "0"		"melee_dmg" "1d6"
+	"ev" "6"
+	
+	"flag" "undead"		"flag" "amphibious"		"flag" "drowning_attack"
+}
+
+{
+	"id" 	"zombie"			"dl" "2"
+	"name"	"Zombie"			"glyph" "122"	"color" "255,191,0"
+	
+	"health" "20"
+	"melee_acc" "-1"	"melee_dmg" "1d6"
+	"ev" "6"
+	
+	"flag" "undead"
+	"spawn_on_death"	"zombie_guts"
+}
+
+{
+	"id"	"zombie_guts"		"dl" "1"
+	"name"	"Zombie Guts"		"glyph" "111"	"color" "255,191,0"
+	
+	"health" "6"
+	"melee_acc" "-2"	"melee_dmg" "1d3"
+	"ev" "5"
+	
+	"flag" "undead" 	"flag" "ooze"	"flag" "split_on_take_damage"
+}
+
+{
+	"id"	"crawling_corpse"	"dl" "3"
+	"name"	"Crawling Corpse"	"glyph" "122"	"color" "102,82,51"
+	
+	"health" "15"
+	"melee_acc" "2"	"melee_dmg" "1d6"	"melee_dmg_bonus" "1"
+	"ev" "6"
+	"flag" 	"moves_slowly"		"flag" "grapples"
+}
+
+{
+	"id"	"skull_pile"		"dl" "3"
+	"name"	"Skull Pile"		"glyph" "239"	"color" "210,210,210"
+	
+	"health" "10"
+	"ev" "0" 	"dr" "5"
+	"flag" 	"immobile"		"flag" "no_melee"
+	"spawns"	"floating_skull"
+}

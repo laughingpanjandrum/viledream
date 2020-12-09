@@ -1,0 +1,23 @@
+
+{
+	"id" "wood_golem"		"dl" "2"
+	"name" "Wood Golem"		"glyph" "71"	"color" "158,134,100"
+	
+	"health" "20"
+	"melee_acc" "-2"	"melee_dmg" "1d6"
+	"ev" "5"	"dr" "4"
+	
+	"flag" "construct"	"flag" "vulnerable_fire"	"flag" "dumb"
+}
+
+
+{
+	"id" "bone_golem"		"dl" "4"
+	"name" "Bone Golem"		"glyph" "71"	"color" "217,217,0"
+	
+	"health" "20"
+	"melee_acc" "0"		"melee_dmg" "1d6"	"flag" "melee_bleed_attack"
+	"ev" "5"	"dr" "6"
+	
+	"flag" "construct" 	"flag" "dumb"
+}

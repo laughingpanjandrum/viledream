@@ -1,0 +1,5 @@
+constructs.txt
+humanoids.txt
+prison.txt
+undead.txt
+vermin.txt

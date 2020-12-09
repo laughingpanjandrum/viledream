@@ -1,0 +1,11 @@
+
+{
+	"id"	"rotgrub"		"dl" "3"
+	"name"	"Rotgrub"		"glyph" "103"		"color" "217,163,0"
+	
+	"health" "5"
+	"melee_acc" "0"		"melee_dmg" "1d6"
+	"ev" "8"
+	
+	"flag" 	"nauseating"
+}

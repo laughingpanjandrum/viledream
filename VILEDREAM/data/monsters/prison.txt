@@ -1,0 +1,59 @@
+
+
+{
+	"id" "chained_prisoner"		"dl" "1"
+	"name" "Chained Prisoner" 	"glyph" "112" 	"color" "200,0,0"
+	
+	"health" "10"
+	"melee_acc" "0"		"melee_dmg" "1d4"
+	"ev" "6"
+}
+
+
+{
+	"id" "mad_prisoner"			"dl" "1"
+	"name" "Mad Prisoner"		"glyph" "112"	"color" "0,0,200"
+	
+	"health" "5"
+	"melee_acc" "-3"	"melee_dmg" "1d3"
+	"ev" "3"
+}
+
+{
+	"id" "jailors_hound"		"dl" "2"
+	"name" "Jailor's Hound"		"glyph" "100"	"color" "158,134,100"
+	
+	"health" "8"
+	"melee_acc" "0"		"melee_dmg" "1d4"
+	"ev" "10"
+	"flag" "moves_quickly"
+}
+
+{
+	"id" "pale_prisoner"		"dl" "2"
+	"name" "Pale Prisoner"		"glyph" "112"	"color" "102,102,255"
+	
+	"health" "8"
+	"melee_acc" "0"		"melee_dmg" "1d4"
+	"ev" "10"
+	"flag" "teleports"
+}
+
+{
+	"id" "gaunt_jailor"			"dl" "3"
+	"name" "Gaunt Jailor"		"glyph" "74"	"color" "200,0,0"
+	
+	"health" "25"
+	"melee_acc" "1"		"melee_dmg" "1d4"	"melee_dmg_bonus" "1"	"melee_fire_dmg" "1d4"
+	"ev" "8"
+}
+
+{
+	"id" "torturer"				"dl" "4"
+	"name" "Torturer"			"glyph" "74"	"color" "255,153,51"
+	
+	"health" "30"
+	"melee_acc" "2"		"melee_dmg" "1d6"	"melee_dmg_bonus" "1"
+	"ev" "8"	"dr" "3"
+	"flag" "touch_attack_agony"
+}

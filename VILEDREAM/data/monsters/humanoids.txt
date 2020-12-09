@@ -1,0 +1,20 @@
+
+{
+	"id" "ratman"		"dl" "2"
+	"name" "Rat-Man"	"glyph" "104"	"color" "158,134,100"
+	
+	"health" "12"
+	"melee_acc" "1"		"melee_dmg" "1d4"
+	"ev" "9"
+	"flag" "cowardly"
+}
+
+{
+	"id" "hyenaman"		"dl" "3"
+	"name" "Hyena-Man"	"glyph" "104"	"color" "217,217,0"
+	
+	"health" "15"
+	"melee_acc" "1"		"melee_dmg" "1d6"	"flag" "melee_reach"
+	"ev" "8"	"block" "4"
+}
+	

@@ -1,0 +1,66 @@
+
+{
+"id"	"forsaken_prison"
+"type"	"pack"
+	
+	"mad_prisoner"	
+	"pale_prisoner"
+	"jailors_hound"
+	
+}
+
+{
+"id"	"forsaken_prison"
+"type"	"solo"
+
+	"chained_prisoner"	
+	"gaunt_jailor"
+	"torturer"
+	
+}
+
+---------------------------------------------
+
+{
+"id"	"silent_city"
+"type"	"pack"
+
+	"hyenaman"
+	"ratman"
+
+}
+
+{
+"id"	"silent_city"
+"type"	"solo"
+
+	"bone_golem"
+	"wood_golem"
+	"zombie"
+	
+}
+
+---------------------------------------------
+
+{
+"id"	"sunken_ruins"
+"type"	"pack"
+
+	"crawling_corpse"
+	"drowned_dead"
+	"floating_skull"
+	"rotgrub"
+	"skull_pile"
+	
+}
+
+{
+"id"	"sunken_ruins"
+"type"	"solo"
+
+	"crawling_hand"
+	"skull_pile"
+	
+}
+
+
