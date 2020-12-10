@@ -1076,7 +1076,10 @@ gridmapPtr mapgen::generate_HomeBase()
 
 
 	//	shops
-	m->addShop(lootgen::generate_SpellShop(), intpair(28, 44));
+	m->addShop(lootgen::generate_AmmoStore(), intpair(29, 36));
+	m->addShop(lootgen::generate_AlchemyShop(), intpair(17, 36));
+	m->addShop(lootgen::generate_PotionShop(), intpair(18, 38));
+	m->addShop(lootgen::generate_SpellShop(), intpair(28, 37));
 
 
 	//	finish

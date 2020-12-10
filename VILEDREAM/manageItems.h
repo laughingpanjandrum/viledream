@@ -56,3 +56,9 @@ void pickupItem(gamedataPtr gdata, itemPtr it, char and_do_with);
 
 void tryAutopickup(gamedataPtr gdata, const intpair pt);
 void tryPickupItem(gamedataPtr gdata);
+
+
+
+//	Shopping
+
+void tryBuyCurrentItem(gamedataPtr gdata);

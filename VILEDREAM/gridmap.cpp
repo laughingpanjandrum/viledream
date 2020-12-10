@@ -106,7 +106,7 @@ void gridmap::addStairs(const intpair pos, string id, string name, int dl, int g
 //	Special stairs that lead to our home base
 void gridmap::addStairsToHomeBase(const intpair pos)
 {
-	addStairs(pos, "fireholm", "stairs to Fireholm", 0);
+	addStairs(pos, "fireholm", "stairs to Fireholm", 0, '<');
 }
 
 

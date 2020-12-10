@@ -428,3 +428,30 @@ void tryPickupItem(gamedataPtr gdata)
 	else
 		messages::add(gdata, "Nothing here to pick up!", COLOR_NEGATIVE);
 }
+
+
+//	Try to buy the item at the current index in the current shop
+void tryBuyCurrentItem(gamedataPtr gdata)
+{
+	if (gdata->_idx >= 0 && gdata->_idx < gdata->_currentShop->_items.size())
+	{
+		//	can we afford it?
+		if (gdata->_gold >= gdata->_currentShop->_costs[gdata->_idx])
+		{
+			//	get and pay for the item
+			auto it = gdata->_currentShop->_items[gdata->_idx];
+			messages::add(gdata, "Bought " + it->getName() + ".", it->getColor());
+			addToInventory(gdata, it);
+			gdata->_gold -= gdata->_currentShop->_costs[gdata->_idx];
+
+			//	remove it from the shop
+			gdata->_currentShop->_items.erase(gdata->_currentShop->_items.begin() + gdata->_idx);
+			gdata->_currentShop->_costs.erase(gdata->_currentShop->_costs.begin() + gdata->_idx);
+		}
+		else
+			messages::add(gdata, "Not enough gold!", COLOR_NEGATIVE);
+	}
+	
+	//	deselect item
+	gdata->_idx = -1;
+}

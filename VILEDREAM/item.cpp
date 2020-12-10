@@ -177,3 +177,15 @@ void item::setEnchantment(const Enchantment ench, const int bns)
 	_enchantBonus = bns;
 }
 
+int item::getGoldCost() const
+{
+	switch (_category)
+	{
+	case(ITEM_SPELLBOOK):
+		return 100 * pow(2, getSpellCost(_containsSpell));
+
+	default:
+		return itemData::getGoldValue(_id) * _amount;
+	}
+}
+

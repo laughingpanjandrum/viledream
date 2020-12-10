@@ -36,20 +36,28 @@ namespace lootgen
 		itemData::RING_HEALER, itemData::RING_LIFE, itemData::RING_MIGHTY_BLOWS, itemData::RING_RAMPAGE,
 	};
 
+	const vector<itemData::itid> COATINGS_ALL = {
+		itemData::COATING_FLAME, itemData::COATING_ICE, itemData::COATING_LIGHTNING, itemData::COATING_POISON,
+	};
+
 
 	Enchantment rollCloakEnchant(const int dl);
 	ItemQuality rollQualityTier(const int dl);
 
 
+	itemData::itid rollCoatingId();
 	itemData::itid rollConsumableId();
 	itemData::itid rollThrownId();
 
 
-	itemPtr rollAmmoDrop(const int dl);
+	itemPtr rollAlchemyWeaponDrop(const int dl);
+	itemPtr rollAmmoDrop(const int dl, bool forceSpecial = false);
 	itemPtr rollArmourDrop(const int dl);
 	itemPtr rollCloakDrop(const int dl);
 	itemPtr rollConsumableDrop(const int dl);
+	itemPtr rollPotionDrop(const int dl);
 	itemPtr rollRingDrop(const int dl);
+	itemPtr rollScrollDrop(const int dl);
 	itemPtr rollSpellbookDrop(const int dl);
 	itemPtr rollWeaponDrop(const int dl);
 
@@ -63,6 +71,9 @@ namespace lootgen
 
 	//	Rolling shops
 
+	itemShopPtr generate_AlchemyShop();
+	itemShopPtr generate_AmmoStore();
+	itemShopPtr generate_PotionShop();
 	itemShopPtr generate_SpellShop();
 
 

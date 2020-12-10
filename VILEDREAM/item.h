@@ -61,6 +61,11 @@ public:
 	bool grantsSpell() const { return _containsSpell != SPELL__NONE; }
 
 
+	//	Valuation
+
+	int getGoldCost() const;
+
+
 	//	Stacking
 
 	bool canStack() const { return _category == ITEM_AMMO || _category == ITEM_CONSUMABLE || _category == ITEM_GOLD || _category == ITEM_THROWN; }

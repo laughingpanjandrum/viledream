@@ -596,6 +596,45 @@ int itemData::getStatRequirement(const itid id)
 	return 0;
 }
 
+int itemData::getGoldValue(const itid id)
+{
+	switch (id)
+	{
+	case(ARROWS_STANDARD):
+		return 1;
+	case(ARROWS_POISON):
+	case(ARROWS_SERRATED):
+	case(ARROWS_SILVERED):
+		return 3;
+
+	case(COATING_FLAME):
+	case(COATING_ICE):
+	case(COATING_LIGHTNING):
+	case(COATING_POISON):
+		return 10;
+
+	case(POTION_HASTE):
+	case(POTION_MIGHT):
+	case(POTION_STONESKIN):
+		return 25;
+
+	case(SCROLL_PORTAL):
+		return 50;
+
+	case(URN_FIRE):
+	case(URN_ICE):
+	case(URN_LIGHTNING):
+		return 8;
+
+	case(URN_OIL):
+	case(URN_WATER):
+		return 4;
+		
+	default:
+		return 1;
+	}
+}
+
 string getWeaponTagName(const WeaponTag wtag)
 {
 	switch (wtag)

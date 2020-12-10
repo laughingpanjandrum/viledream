@@ -233,6 +233,8 @@ void game::processInput()
 		case(STATE_VIEW_SHOP):
 			if (_ih->isKeypressACharacter())
 				_gdata->_idx = _ih->getIntFromKeypressChar();
+			else if (_ih->isKeyPressed(TCODK_ENTER))
+				tryBuyCurrentItem(_gdata);
 			break;
 
 

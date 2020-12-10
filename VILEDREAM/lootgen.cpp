@@ -25,6 +25,11 @@ ItemQuality lootgen::rollQualityTier(const int dl)
 }
 
 
+itemData::itid lootgen::rollCoatingId()
+{
+	return rollIdOnTable(&COATINGS_ALL);
+}
+
 //	Roll a random consumable. Each has its own weight.
 itemData::itid lootgen::rollConsumableId()
 {
@@ -65,13 +70,24 @@ itemData::itid lootgen::rollThrownId()
 }
 
 
+//	Any alchemical weapon (thrown items, coatings)
+itemPtr lootgen::rollAlchemyWeaponDrop(const int dl)
+{
+	if (roll_one_in(4))
+		return itemPtr(new item(rollCoatingId()));
+	else
+		return itemPtr(new item(rollThrownId()));
+}
+
+
 
 //	Stack of arrows.
-itemPtr lootgen::rollAmmoDrop(const int dl)
+//	If 'forceSpecial' is set, will not generate standard arrows.
+itemPtr lootgen::rollAmmoDrop(const int dl, bool forceSpecial)
 {
 	//	choose type
 	itemData::itid id = itemData::ARROWS_STANDARD;
-	int r = randint(1, 50);
+	int r = randint(1, forceSpecial ? 25 : 1);
 	if		(r <= 10)	id = itemData::ARROWS_POISON;
 	else if (r <= 20)	id = itemData::ARROWS_SERRATED;
 	else if (r <= 25)	id = itemData::ARROWS_SILVERED;
@@ -122,19 +138,33 @@ itemPtr lootgen::rollCloakDrop(const int dl)
 //	A random consumable.
 itemPtr lootgen::rollConsumableDrop(const int dl)
 {
-	itemData::itid id;
-
-	//	chance for either consumable or bomb
-	if (roll_one_in(3))
-		id = rollConsumableId();
+	itemPtr it = nullptr;
+	int r = randint(1, 100);
+	if (r <= 50)
+		it = rollPotionDrop(dl);
+	else if (r <= 90)
+		it = rollAlchemyWeaponDrop(dl);
 	else
-		id = rollThrownId();
+		it = rollScrollDrop(dl);
 	
 	//	chance to drop more than 1
 	int amt = 1;
 	if (roll_one_in(20))
 		amt += randint(1, 2);
-	return itemPtr(new item(id, amt));
+	it->_amount = amt;
+	return it;
+}
+
+
+//	A random potion.
+itemPtr lootgen::rollPotionDrop(const int dl)
+{
+	itemData::itid id = itemData::ITEM__ID__NONE;
+	int r = randint(1, 100);
+	if		(r <= 30)	id = itemData::POTION_HASTE;
+	else if (r <= 65)	id = itemData::POTION_MIGHT;
+	else if (r <= 100)	id = itemData::POTION_STONESKIN;
+	return itemPtr(new item(id));
 }
 
 
@@ -144,6 +174,13 @@ itemPtr lootgen::rollRingDrop(const int dl)
 {
 	auto id = rollIdOnTable(&RINGS_ALL);
 	return itemPtr(new item(id));
+}
+
+
+//	A random scroll.
+itemPtr lootgen::rollScrollDrop(const int dl)
+{
+	return itemPtr(new item(itemData::SCROLL_PORTAL));
 }
 
 
@@ -216,6 +253,57 @@ vector<itemPtr> lootgen::rollDropTable(const int dl)
 	return drops;
 }
 
+itemShopPtr lootgen::generate_AlchemyShop()
+{
+	auto shop = itemShopPtr(new itemShop());
+	int icount = 3 + dieRoll(2, 6);
+	while (icount-- > 0)
+	{
+		auto it = rollAlchemyWeaponDrop(20);
+		it->_amount = randint(1, 3);
+		shop->_items.push_back(it);
+		shop->_costs.push_back(it->getGoldCost());
+	}
+	return shop;
+}
+
+itemShopPtr lootgen::generate_AmmoStore()
+{
+	auto shop = itemShopPtr(new itemShop());
+	
+	//	standard arrows
+	for (unsigned i = 1; i <= 5; i++)
+	{
+		auto it = itemPtr(new item(itemData::ARROWS_STANDARD, 10 * i));
+		shop->_items.push_back(it);
+		shop->_costs.push_back(it->getGoldCost());
+	}
+
+	// special arrows
+	int icount = dieRoll(4, 2);
+	while (icount-- > 0)
+	{
+		auto it = rollAmmoDrop(20, true);
+		shop->_items.push_back(it);
+		shop->_costs.push_back(it->getGoldCost());
+	}
+	return shop;
+}
+
+itemShopPtr lootgen::generate_PotionShop()
+{
+	auto shop = itemShopPtr(new itemShop());
+	int icount = 3 + dieRoll(2, 6);
+	while (icount-- > 0)
+	{
+		auto it = rollPotionDrop(20);
+		it->_amount = randint(1, 6);
+		shop->_items.push_back(it);
+		shop->_costs.push_back(it->getGoldCost());
+	}
+	return shop;
+}
+
 itemShopPtr lootgen::generate_SpellShop()
 {
 	auto shop = itemShopPtr(new itemShop());
@@ -224,7 +312,7 @@ itemShopPtr lootgen::generate_SpellShop()
 	{
 		auto sp = rollSpellbookDrop(randint(1, 20));
 		shop->_items.push_back(sp);
-		shop->_costs.push_back(getSpellCost(sp->_containsSpell) * 100);
+		shop->_costs.push_back(sp->getGoldCost());
 	}
 	return shop;
 }

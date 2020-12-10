@@ -87,4 +87,8 @@ namespace itemData
 	int getStatRequirement(const itid id);
 
 
+	//	Buying
+	int getGoldValue(const itid id);
+
+
 }
