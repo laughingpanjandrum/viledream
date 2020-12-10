@@ -26,6 +26,7 @@ void game::start()
 	initializeEquipmentStorage(_gdata);
 	_gdata->_player = playerPtr(new player());
 	_gdata->_player->_weapon = itemPtr(new item(itemData::WEAPON_DAGGER));
+	addToInventory(_gdata, itemPtr(new item(itemData::SCROLL_PORTAL)));
 	//_gdata->_player->_leftRing = itemPtr(new item(itemData::RING_BLOOD_HUNGER));
 	//addToInventory(_gdata, itemPtr(new item(itemData::COATING_POISON, 5)));
 	//_gdata->_player->_ranged = itemPtr(new item(itemData::RANGED_SHORTBOW));
@@ -95,6 +96,9 @@ void game::drawScreen()
 
 	case(STATE_PICKUP_ITEM):
 		_disp.drawEquipmentPickup(_gdata, _gdata->_pickingUp); break;
+
+	case(STATE_VIEW_SHOP):
+		_disp.drawShop(_gdata, _gdata->_currentShop); break;
 
 	case(STATE_VIEW_FEATS):
 		_disp.drawFeatsKnown(_gdata); break;
@@ -225,6 +229,13 @@ void game::processInput()
 			break;
 
 
+			//	Shopping
+		case(STATE_VIEW_SHOP):
+			if (_ih->isKeypressACharacter())
+				_gdata->_idx = _ih->getIntFromKeypressChar();
+			break;
+
+
 			//	Feats
 		case(STATE_LEARN_FEAT):
 		case(STATE_VIEW_FEATS):
@@ -328,7 +339,7 @@ void game::mainGameInput()
 	else if (_ih->isKeyPressed('i'))
 		openInventory(_gdata);
 	else if (_ih->isKeyPressed('e'))
-		openEquipmentMenu(_gdata, true);
+		openEquipmentMenu(_gdata, false);
 	else if (_ih->isKeyPressed('m'))
 		openSpellList(_gdata);
 	else if (_ih->isKeyPressed('F'))

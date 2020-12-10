@@ -54,8 +54,16 @@ namespace lootgen
 	itemPtr rollWeaponDrop(const int dl);
 
 
+
+	//	Rolling items
+
 	itemData::itid rollIdOnTable(const vector<itemData::itid>* table);
 	vector<itemPtr> rollDropTable(const int dl);
+
+
+	//	Rolling shops
+
+	itemShopPtr generate_SpellShop();
 
 
 }

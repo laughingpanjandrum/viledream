@@ -176,3 +176,4 @@ void item::setEnchantment(const Enchantment ench, const int bns)
 	_enchant = ench;
 	_enchantBonus = bns;
 }
+

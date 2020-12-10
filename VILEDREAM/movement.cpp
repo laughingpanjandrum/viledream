@@ -82,7 +82,21 @@ void knockback(gamedataPtr gdata, creaturePtr target, intpair awayFrom, int dist
 void playerBumpTile(gamedataPtr gdata, const intpair pt)
 {
 	auto tl = gdata->_map->getTile(pt);
-	messages::add(gdata, "Blocked by a " + getMaptileName(tl) + "!", COLOR_HIGHLIGHT);
+
+	//	open equipment menu
+	if (tl == TILE_STASH_EQUIPMENT)
+		openEquipmentMenu(gdata, true);
+
+	//	shop
+	else if (gdata->_map->hasItemShop(pt))
+	{
+		gdata->_currentShop = gdata->_map->getItemShop(pt);
+		gdata->_state = STATE_VIEW_SHOP;
+	}
+
+	//	can't move here
+	else
+		messages::add(gdata, "Blocked by a " + getMaptileName(tl) + "!", COLOR_HIGHLIGHT);
 }
 
 

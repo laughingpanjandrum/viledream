@@ -55,6 +55,11 @@ public:
 	void drawArmourInfo(gamedataPtr gdata, itemPtr it, int atx, int aty);
 	void drawCloakInfo(gamedataPtr gdata, itemPtr it, int atx, int aty);
 	void drawShieldInfo(gamedataPtr gdata, itemPtr it, int atx, int aty);
+	void drawSpellbookInfo(gamedataPtr gdata, itemPtr it, int atx, int aty);
+
+	void drawSpellInfo(gamedataPtr gdata, Spell sp, int atx, int aty);
+
+	void drawShop(gamedataPtr gdata, itemShopPtr s);
 
 
 	//	REXPaint images

@@ -215,3 +215,16 @@ vector<itemPtr> lootgen::rollDropTable(const int dl)
 
 	return drops;
 }
+
+itemShopPtr lootgen::generate_SpellShop()
+{
+	auto shop = itemShopPtr(new itemShop());
+	int icount = dieRoll(3, 4);
+	while (icount-- > 0)
+	{
+		auto sp = rollSpellbookDrop(randint(1, 20));
+		shop->_items.push_back(sp);
+		shop->_costs.push_back(getSpellCost(sp->_containsSpell) * 100);
+	}
+	return shop;
+}

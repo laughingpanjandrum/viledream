@@ -111,6 +111,14 @@ public:
 	const vector<mapStairsPtr>* getAllStairs() const { return &_stairs; }
 
 
+	//	Shops
+
+	void addShop(itemShopPtr s, const intpair pt);
+
+	itemShopPtr getItemShop(const intpair at) const;
+	bool hasItemShop(const intpair at) const { return getItemShop(at) != nullptr; }
+
+
 
 	//	Map used for fov/pathfinding
 
@@ -155,6 +163,8 @@ private:
 	vector<mapStairsPtr> _stairs;
 
 	TCODMapPtr _tmap;
+
+	vector<itemShopPtr> _shops;
 
 };
 typedef shared_ptr<gridmap> gridmapPtr;

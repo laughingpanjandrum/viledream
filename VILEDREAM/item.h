@@ -96,3 +96,15 @@ protected:
 
 };
 typedef shared_ptr<item> itemPtr;
+
+
+
+
+//	for buying stuff
+struct itemShop
+{
+	vector<itemPtr> _items;
+	vector<int> _costs;
+	intpair _pos;
+};
+typedef shared_ptr<itemShop> itemShopPtr;

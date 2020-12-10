@@ -126,6 +126,23 @@ mapStairsPtr gridmap::getStairs(const intpair pt) const
 	return nullptr;
 }
 
+void gridmap::addShop(itemShopPtr s, const intpair pt)
+{
+	_shops.push_back(s);
+	s->_pos = pt;
+	setTile(TILE_MERCHANT, pt);
+}
+
+itemShopPtr gridmap::getItemShop(const intpair at) const
+{
+	for (auto s : _shops)
+	{
+		if (s->_pos == at)
+			return s;
+	}
+	return nullptr;
+}
+
 void gridmap::setFOVMapCentre(const intpair ctr)
 {
 	_tmap->computeFov(ctr.first, ctr.second, 20);

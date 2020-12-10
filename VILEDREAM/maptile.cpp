@@ -16,6 +16,7 @@ string getMaptileName(const maptile tl)
 	case(TILE_FLOOR):			return "floor";
 	case(TILE_GRASS):			return "grass";
 	case(TILE_GRAVE):			return "tombstone";
+	case(TILE_MERCHANT):		return "merchant";
 	case(TILE_MOSS):			return "moss";
 	case(TILE_SAND):			return "sand";
 	case(TILE_STASH_EQUIPMENT):	return "equipment stash";
@@ -68,6 +69,9 @@ int getMaptileGlyph(const maptile tl)
 
 	case(TILE_GRAVE):
 		return 239;
+
+	case(TILE_MERCHANT):
+		return '@';
 
 	case(TILE_MOSS):
 		return '"';
@@ -161,6 +165,9 @@ colorType getMaptileColor(const maptile tl)
 	case(TILE_TREE_DEAD):
 		return TCODColor::darkAmber;
 
+	case(TILE_MERCHANT):
+		return TCODColor::gold;
+
 	default:
 		return COLOR_WHITE;
 	}
@@ -178,6 +185,7 @@ bool isMaptileWalkable(const maptile tl)
 	{
 	case(TILE_CELL_WINDOW):
 	case(TILE_GRAVE):
+	case(TILE_MERCHANT):
 	case(TILE_STASH_EQUIPMENT):
 	case(TILE_STATUE_SANDSTONE):
 	case(TILE_STATUE_STONE):
@@ -219,6 +227,8 @@ bool canCoverWithSurface(const maptile tl, const surface sf)
 	else
 		return tl == TILE_ASH || tl == TILE_BONES || tl == TILE_DIRT || tl == TILE_FLOOR || tl == TILE_SAND || tl == TILE_WATER_DEEP || tl == TILE_WATER_PUTRID;
 }
+
+
 
 bool isMaptileFlammable(const maptile tl)
 {

@@ -170,15 +170,8 @@ void display::drawSpellList(gamedataPtr gdata)
 	if (gdata->_idx >= 0 && gdata->_idx < gdata->_player->_spellsKnown.size())
 	{
 		auto sp = gdata->_player->_spellsKnown[gdata->_idx];
-		_win.write(4, 48, getSpellName(sp), getSpellColor(sp));
-
-		_win.write(4, 49, "MP Cost:", COLOR_MEDIUM);
-		for (unsigned i = 0; i < getSpellCost(sp); i++)
-			_win.writec(13 + i * 2, 49, 9, TCODColor::lightBlue);
-
-		writeFormatted(4, 50, "Castings Left: #" + to_string(gdata->_player->_spellCastsLeft[gdata->_idx]), { COLOR_LIGHT });
-
-		_win.writeWrapped(4, 52, 45, getSpellDescription(sp), COLOR_MEDIUM);
+		writeFormatted(4, 48, "Castings Left: #" + to_string(gdata->_player->_spellCastsLeft[gdata->_idx]), { COLOR_LIGHT });
+		drawSpellInfo(gdata, sp, 4, 50);
 	}
 
 	//	If no spell is selected, draw messages in that box.
@@ -567,6 +560,9 @@ void display::drawItemInfo(gamedataPtr gdata, itemPtr it, int atx, int aty, bool
 	case(ITEM_SHIELD):
 		drawShieldInfo(gdata, it, atx, aty + 2); break;
 
+	case(ITEM_SPELLBOOK):
+		drawSpellbookInfo(gdata, it, atx, aty + 2); break;
+
 	case(ITEM_RANGED):
 	case(ITEM_WEAPON):
 		drawWeaponInfo(gdata, it, atx, aty + 2); break;
@@ -642,6 +638,55 @@ void display::drawShieldInfo(gamedataPtr gdata, itemPtr it, int atx, int aty)
 	if (gdata->_player->getDerivedAttributeValue(ATTR_DEXTERITY) < req)
 		scol = COLOR_HIGHLIGHT_NEG;
 	writeFormatted(atx, ++aty, "Requires #" + to_string(req) + " @Dexterity", { scol });
+}
+
+
+
+void display::drawSpellbookInfo(gamedataPtr gdata, itemPtr it, int atx, int aty)
+{
+	_win.write(atx, ++aty, "Read to learn castings of this spell.", COLOR_MEDIUM);
+	drawSpellInfo(gdata, it->_containsSpell, atx, aty + 2);
+}
+
+
+
+void display::drawSpellInfo(gamedataPtr gdata, Spell sp, int atx, int aty)
+{
+	_win.write(atx, aty, getSpellName(sp), getSpellColor(sp));
+
+	_win.write(atx, ++aty, "MP Cost:", COLOR_MEDIUM);
+	for (unsigned i = 0; i < getSpellCost(sp); i++)
+		_win.writec(atx + 9 + i * 2, aty, 9, TCODColor::lightBlue);
+
+	++aty;
+	_win.writeWrapped(atx, ++aty, 45, getSpellDescription(sp), COLOR_MEDIUM);
+}
+
+
+
+void display::drawShop(gamedataPtr gdata, itemShopPtr s)
+{
+	drawRXPImage(_img_Main, 0, 0);
+	drawSidebar(gdata);
+
+	_win.write(4, 4, "ITEM SHOP", COLOR_MEDIUM);
+	for (unsigned i = 0; i < s->_items.size(); i++)
+	{
+		int y = 6 + i * 2;
+		_win.writec(6, y, CHAR_SET_LOWERCASE[i], (gdata->_idx == i) ? COLOR_WHITE : COLOR_DARK);
+
+		auto it = s->_items[i];
+		_win.writec(8, y, it->getGlyph(), it->getColor());
+		_win.write(10, y, it->getVerboseName(), it->getColor());
+
+		_win.write(48, y, to_string(s->_costs[i]), (gdata->_gold >= s->_costs[i]) ? COLOR_POSITIVE : COLOR_NEGATIVE);
+	}
+
+	//	describe selected item, if any
+	if (gdata->_idx >= 0 && gdata->_idx < s->_items.size())
+		drawItemInfo(gdata, s->_items[gdata->_idx], 4, 48);
+	else
+		drawMessages(gdata);
 }
 
 

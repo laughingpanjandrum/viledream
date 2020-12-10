@@ -1075,6 +1075,10 @@ gridmapPtr mapgen::generate_HomeBase()
 	m->addStairs(intpair(27, 44), ZONE_ID_FORSAKEN_PRISON, "stairs down", 1, '>');
 
 
+	//	shops
+	m->addShop(lootgen::generate_SpellShop(), intpair(28, 44));
+
+
 	//	finish
 	m->_name = "Fireholm";
 	m->updateTmap();
