@@ -224,13 +224,22 @@ itemData::itid lootgen::rollIdOnTable(const vector<itemData::itid>* table)
 //	List of loot drops for a given danger level
 vector<itemPtr> lootgen::rollDropTable(const int dl)
 {
-	//	items
+	//	item options get more diverse as we get deeper
+	int maxRoll = 50;
+	if (dl > 2)	maxRoll = 95;
+	if (dl > 4)	maxRoll = 100;
+
+	//	item quantity
 	vector<itemPtr> drops;
-	int amt = 4 + dieRoll(6, 3);
+	int amt = 4 + randint(1, 3);
+	if (dl > 2)
+		amt += dieRoll(2, 3);
+
+	//	roll the items
 	while (amt-- > 0)
 	{
 		//	roll type of item
-		int r = randint(1, 100);
+		int r = randint(1, maxRoll);
 		if		(r <= 20)	drops.push_back(rollWeaponDrop(dl));
 		else if (r <= 30)	drops.push_back(rollArmourDrop(dl));
 		else if (r <= 80)	drops.push_back(rollConsumableDrop(dl));

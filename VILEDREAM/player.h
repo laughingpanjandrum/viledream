@@ -36,6 +36,8 @@ public:
 	virtual int getMaxHealth() const;
 	virtual int getMaxMagicPoints() const;
 
+	void healToMax() { _damageTaken = 0; }
+
 
 	//	Attacks
 

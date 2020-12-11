@@ -51,6 +51,7 @@
 	"floating_skull"
 	"rotgrub"
 	"skull_pile"
+	"toadman"
 	
 }
 

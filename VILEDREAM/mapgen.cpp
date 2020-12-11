@@ -652,9 +652,11 @@ void mapgen::addDoorsToMap(gridmapPtr m)
 //	Set of valid connections from the given map
 vector<string> mapgen::getZoneOptions(string connectedTo, int for_dl)
 {
-	vector<string> options{ ZONE_ID_SILENT_CITY, };
+	vector<string> options{ };
 	if (for_dl <= 4)
 		options.push_back(ZONE_ID_FORSAKEN_PRISON);
+	if (for_dl > 1)
+		options.push_back(ZONE_ID_SILENT_CITY);
 	if (for_dl > 2)
 		options.push_back(ZONE_ID_SUNKEN_RUINS);
 	if (for_dl > 5)
@@ -756,6 +758,7 @@ void mapgen::room_Prison(gridmapPtr m, TCODBsp* node)
 void mapgen::room_SilentRuins(gridmapPtr m, TCODBsp * node)
 {
 	int r = randint(1, 12);
+	fillRegion(m, TILE_SAND, node->x, node->y, node->w, node->h);
 	if (r == 1)
 	{
 		addLake(m, intpair(node->x + node->w / 2, node->y + node->h / 2), (node->w + node->h) / 3, TILE_WATER_DEEP, TILE_GRASS);
@@ -775,7 +778,7 @@ void mapgen::room_SilentRuins(gridmapPtr m, TCODBsp * node)
 	}
 	else if (r < 7)
 	{
-		scatterTile(m, TILE_SAND, node->x + 1, node->y + 1, node->w - 3, node->h - 3, 0.4);
+		scatterTile(m, TILE_BONES, node->x + 1, node->y + 1, node->w - 3, node->h - 3, 0.4);
 	}
 }
 

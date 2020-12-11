@@ -508,4 +508,6 @@ void game::awaitDebugCommand()
 	}
 	else if (cmd == "level")
 		playerAddLevel(_gdata);
+	else if (cmd == "heal")
+		_gdata->_player->healToMax();
 }

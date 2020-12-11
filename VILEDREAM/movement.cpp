@@ -77,6 +77,27 @@ void knockback(gamedataPtr gdata, creaturePtr target, intpair awayFrom, int dist
 }
 
 
+//	Drags target nearer a given point.
+void pull(gamedataPtr gdata, creaturePtr target, intpair to, int dist)
+{
+	auto pt = target->_pos;
+	auto vec = get2dVector(pt, to);
+	while (dist-- > 0)
+	{
+		intpair_add(&pt, &vec);
+		if (gdata->_map->isPointClear(pt))
+		{
+			target->_pos = pt;
+			if (target->isPlayer())
+				setPlayerPosition(gdata, pt);
+			standOnTile(gdata, target);
+		}
+		else
+			break;
+	}
+}
+
+
 
 //	Player tries to walk into a non-walkable tile.
 void playerBumpTile(gamedataPtr gdata, const intpair pt)

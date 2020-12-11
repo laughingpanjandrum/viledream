@@ -14,6 +14,7 @@ void enterTile(gamedataPtr gdata, creaturePtr cr);
 
 
 void knockback(gamedataPtr gdata, creaturePtr target, intpair awayFrom, int dist);
+void pull(gamedataPtr gdata, creaturePtr target, intpair to, int dist);
 
 
 //	Player movement

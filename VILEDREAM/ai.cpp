@@ -168,6 +168,16 @@ bool ai::tryUseSpecialAbility(gamedataPtr gdata, monsterPtr ai)
 		return true;
 	}
 
+	//	We have a pull attack.
+	if (ai->hasFlag("pull_attack") && getDistanceBetweenCreatures(ai, ai->_target) > 3 && roll_one_in(2))
+	{
+		messages::add(gdata, ai->getName() + " drags you!", COLOR_WARNING);
+		pull(gdata, ai->_target, ai->_pos, randint(1, 2));
+		addAnimation(gdata, anim_BulletPath(getBresenhamLine(ai->_pos, ai->_target->_pos), ai->getColor()));
+		ai->setActionDelay();
+		return true;
+	}
+
 	//	We can spawn something.
 	if (!ai->spawns().empty() && roll_one_in(4))
 	{

@@ -17,4 +17,13 @@
 	"melee_acc" "1"		"melee_dmg" "1d6"	"flag" "melee_reach"
 	"ev" "8"	"block" "4"
 }
+
+{
+	"id" "toadman"		"dl" "3"
+	"name" "Toad-Man"	"glyph" "104"	"color" "0, 204, 0"
 	
+	"health" "15"
+	"melee_acc" "1"		"melee_dmg" "1d4"
+	"ev" "8"
+	"flag" "pull_attack"		"flag" "melee_poison_attack"
+}

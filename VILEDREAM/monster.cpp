@@ -100,6 +100,10 @@ int monster::getMeleeAfflictionStacks(const Affliction af) const
 	case(AFFL_BLEED):
 		if (hasFlag("melee_bleed_attack"))	return 1 + dieRoll(_dangerLevel, 3);
 		break;
+
+	case(AFFL_POISON):
+		if (hasFlag("melee_poison_attack")) return 1 + dieRoll(_dangerLevel, 3);
+		break;
 	}
 	return 0;
 }
